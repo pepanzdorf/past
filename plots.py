@@ -295,11 +295,19 @@ def december_vs_july(data):
                      temperatures[temperatures["month"] == 7]["temperature_ds18b20"], alternative="less")
 
 
+def june_vs_july(data):
+    temperatures = data[["month", "temperature_ds18b20"]]
+    temperatures = temperatures.dropna()
+
+    return ttest_ind(temperatures[temperatures["month"] == 6]["temperature_ds18b20"],
+                     temperatures[temperatures["month"] == 8]["temperature_ds18b20"], alternative="less")
+
+
 def temp_vs_light(data):
     temp_light = data[["day", "year", "month", "temperature_ds18b20", "light_bh1750"]]
     temp_light = temp_light.dropna()
 
-    temp_light = temp_light[(temp_light["day"] == 10) & (temp_light["month"] == 4) & (temp_light["year"] == 2024)]
+    temp_light = temp_light[(temp_light["day"] == 1) & (temp_light["month"] == 1) & (temp_light["year"] == 2023)]
 
     result = linregress(temp_light["light_bh1750"], temp_light["temperature_ds18b20"])
     print(f"temp_vs_light: {result}")
@@ -310,7 +318,7 @@ def temp_vs_light(data):
                              mode="lines", name="Lineární regrese", line=dict(color="red")))
 
     fig.update_layout(
-        title_text="Korelace mezi teplotou a světlem",
+        title_text="Korelace mezi světlem a teplotou",
         xaxis_title="Světlo (lux)",
         yaxis_title="Teplota (°C)",
     )
@@ -340,3 +348,25 @@ def temp_vs_humidity(data):
 
     return fig
 
+
+def light_vs_humidity(data):
+    light_hum = data[["day", "year", "month", "light_bh1750", "humidity_dht"]]
+    light_hum = light_hum.dropna()
+
+    light_hum = light_hum[(light_hum["day"] == 1) & (light_hum["month"] == 1) & (light_hum["year"] == 2023)]
+
+    result = linregress(light_hum["light_bh1750"], light_hum["humidity_dht"])
+    print(f"light_vs_humidity: {result}")
+
+    fig = px.scatter(light_hum, x="light_bh1750", y="humidity_dht", title="Korelace mezi světlem a vlhkostí")
+
+    fig.add_trace(go.Scatter(x=light_hum["light_bh1750"], y=result.intercept + result.slope * light_hum["light_bh1750"],
+                                mode="lines", name="Lineární regrese", line=dict(color="red")))
+
+    fig.update_layout(
+        title_text="Korelace mezi světlem a vlhkostí",
+        xaxis_title="Světlo (lux)",
+        yaxis_title="Vlhkost (%)",
+    )
+
+    return fig

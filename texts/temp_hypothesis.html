@@ -4,11 +4,21 @@
         předpokládat, že variance v obou měsících je stejná. (To i podle našich dat poměrně odpovídá)
         Provedeme two-sample t-test pomocí <code>scipy.stats.ttest_ind</code>. Naše nulová hypotéza
         bude, že průměry obou měsíců jsou stejné. Alternativní hypotéza bude, že průměr v prosinci je
-        nižší než v červenci. Nulovou hypotézu zamítneme pro <code>&alpha = 0.05</code>.
+        nižší než v červenci. Nulovou hypotézu zamítneme pro <code>&alpha; = 0.05</code>.
     </p>
     <p>
         <code>TtestResult(statistic=-255.14755825218157, pvalue=0.0, df=19609.0)</code><br>
         Výsledek testu je, že nulovou hypotézu zamítáme. To znamená, že průměr v prosinci je nižší než v
         červenci. Tedy v prosinci je větší zima než v červenci.
+    </p>
+    <p>
+        Druhý test již nebude tak zřejmý. Otestujeme jestli je v srpnu tepleji než v červnu. Nulová
+        hypotéza bude, že průměry obou měsíců jsou stejné. Alternativní hypotéza bude, že průměr v červnu
+        je nižší než v srpnu. Nulovou hypotézu zamítneme pro <code>&alpha; = 0.05</code>.
+    </p>
+    <p>
+        <code>TtestResult(statistic=-1.6375595306185717, pvalue=0.05076300670935042, df=25369.0)</code><br>
+        Výsledek testu je na hraně, ale s <code>p-value = 0.0508</code> nulovou hypotézu nezamítáme.
+        Nelze tedy vyloučit možnost, že v červnu je stejně teplo jako v srpnu.
     </p>
 </div>

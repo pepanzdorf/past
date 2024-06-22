@@ -17,6 +17,15 @@ t_hist_normal.write_html("plots/temp_hist_normal.html", full_html=False, auto_pl
 t_normals = plot_with_normal(all_data)
 t_normals.write_html("plots/temp_normals.html", full_html=False)
 
+lin_reg_temp_vs_hum = temp_vs_humidity(all_data)
+lin_reg_temp_vs_hum.write_html("plots/temp_vs_hum.html", full_html=False)
+
+lin_reg_temp_vs_light = temp_vs_light(all_data)
+lin_reg_temp_vs_light.write_html("plots/temp_vs_light.html", full_html=False)
+
+lin_reg_light_vs_hum = light_vs_humidity(all_data)
+lin_reg_light_vs_hum.write_html("plots/light_vs_hum.html", full_html=False)
+
 
 def fill_template(template, contents):
     for key, value in contents.items():
@@ -40,6 +49,18 @@ with open("texts/temp_text2.html", "r") as f:
 with open("texts/temp_hypothesis.html", "r") as f:
     hypothesis = f.read()
 
+with open("texts/linear_regres_1.html", "r") as f:
+    linear_regres_1 = f.read()
+
+with open("texts/linear_regres_2.html", "r") as f:
+    linear_regres_2 = f.read()
+
+with open("texts/linear_regres_3.html", "r") as f:
+    linear_regres_3 = f.read()
+
+with open("texts/outro.html", "r") as f:
+    OUTRO = f.read()
+
 with open("plots/temp_normal_table.html", "r") as f:
     table1 = f.read()
 
@@ -48,6 +69,15 @@ with open("plots/temp_hist_normal.html", "r") as f:
 
 with open("plots/temp_normals.html", "r") as f:
     normals = f.read()
+
+with open("plots/temp_vs_hum.html", "r") as f:
+    temp_vs_hum = f.read()
+
+with open("plots/temp_vs_light.html", "r") as f:
+    temp_vs_light = f.read()
+
+with open("plots/light_vs_hum.html", "r") as f:
+    light_vs_hum = f.read()
 
 with open("weather_statistics.html", "w") as f:
     f.write(
@@ -61,6 +91,13 @@ with open("weather_statistics.html", "w") as f:
                 "{TEMP HIST NORMAL}": hist_normal,
                 "{TEMP NORMALS}": normals,
                 "{TEMP HYPOTHESIS}": hypothesis,
+                "{LINEAR TEXT}": linear_regres_1,
+                "{LINEAR PLOT}": temp_vs_hum,
+                "{LINEAR TEXT 2}": linear_regres_2,
+                "{LINEAR PLOT 2}": temp_vs_light,
+                "{LINEAR TEXT 3}": linear_regres_3,
+                "{LINEAR PLOT 3}": light_vs_hum,
+                "{OUTRO}": OUTRO
             },
         )
     )

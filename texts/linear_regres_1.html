@@ -1,0 +1,17 @@
+<div id="lr1" style="width: 1000px; margin: 15px auto; background-color: lightgray; padding: 30px 100px 30px 100px">
+    <p>
+        Jako poslední testy provedeme lineární regrese. Budeme chtít zjistit, jak se relativní vlhkost vzduchu mění
+        s teplotou. Provedeme lineární regresi pomocí <code>scipy.stats.linregress</code>. Naše nulová hypotéza
+        bude, že koeficient <code>slope</code> je nulový. Alternativní hypotéza bude, že koeficient <code>slope</code>
+        je nenulový. Nulovou hypotézu zamítneme pro <code>&alpha; = 0.05</code>. Linearní regresi budeme provádět
+        pouze na datech z jednoho dne, protože teplota a relativní vlhkost vzduchu se mění s časem a jinými dlouhodobými veličinami,
+        takže potřebujeme vliv těchto veličin co nejvíce eliminovat. Pokud bychom používali data z delšího období, mohli bychom
+        použít vícedimenzionální regresi a možná by byla potřeba i jiná regrese než lineární.
+    </p>
+    <p>
+        <code>LinregressResult(slope=-3.9214538535235204, intercept=116.8196733738139, rvalue=-0.9916208729215928, pvalue=1.8201221072165316e-254, stderr=0.03031412255247089, intercept_stderr=0.44364044352260645)</code><br>
+        Výsledek testu je, že nulovou hypotézu zamítáme <code>p-value < 0.05</code>. Slope (koeficient u teploty) je záporný a
+        rvalue (pearsonův korelační koeficient) je téměř -1. To znamená, že teplota a relativní vlhkost vzduchu jsou silně negativně
+        korelované. S rostoucí teplotou klesá relativní vlhkost vzduchu.
+    </p>
+</div>

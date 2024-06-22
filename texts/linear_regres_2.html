@@ -1,0 +1,21 @@
+<div id="lr2" style="width: 1000px; margin: 15px auto; background-color: lightgray; padding: 30px 100px 30px 100px">
+    <p>
+        Podobně provedeme regresi pro teplotu a světlo. Naše nulová hypotéza bude, že koeficient <code>slope</code> je nulový.
+        Alternativní hypotéza bude, že koeficient <code>slope</code> je nenulový.
+    </p>
+    <p>
+        <code>LinregressResult(slope=0.0009715368271608328, intercept=11.608492635977832, rvalue=0.8709663562389466, pvalue=1.2235019958743286e-89, stderr=3.252244500758246e-05, intercept_stderr=0.1544486636799364)</code><br>
+        Opět nulovou hypotézu zamítáme <code>p-value < 0.05</code>. Slope (koeficient u teploty) je kladný a rvalue je vysoké (max je 1).
+        To znamená, že teplota a světlo jsou silně pozitivně korelované. S rostoucím světlem roste i teplota.
+    </p>
+    <p>
+        Mohli bychom dojít k závěru, že pokud je světlo korelované s teplotou a teplota s relativní vlhkostí vzduchu, pak by mohlo být světlo
+        korelované s relativní vlhkostí vzduchu. Korelace ale není nutně tranzitivní. Lze ale dokázat, že pokud jsou obě dvojice dostatečně silně
+        korelované, tak bude i tato třetí dvojice korelovaná. Raději, ale otestujeme zvlášť.
+    </p>
+    <p>
+        <code>LinregressResult(slope=-0.0036885424358131624, intercept=71.01240823613237, rvalue=-0.8361716656561954, pvalue=4.686821764178313e-76, stderr=0.00014356590593699945, intercept_stderr=0.681792599443226)</code><br>
+        V tomto případě je ale intuice spravná a světlo je s relativní vlhkostí vzduchu silně negativně korelované. S rostoucím světlem klesá relativní
+        vlhkost vzduchu.
+    </p>
+</div>
