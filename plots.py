@@ -2,7 +2,7 @@ import math
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-from scipy.stats import norm, ttest_ind
+from scipy.stats import norm, ttest_ind, linregress
 import numpy as np
 from constants import *
 import matplotlib.pyplot as plt
@@ -293,4 +293,50 @@ def december_vs_july(data):
 
     return ttest_ind(temperatures[temperatures["month"] == 12]["temperature_ds18b20"],
                      temperatures[temperatures["month"] == 7]["temperature_ds18b20"], alternative="less")
+
+
+def temp_vs_light(data):
+    temp_light = data[["day", "year", "month", "temperature_ds18b20", "light_bh1750"]]
+    temp_light = temp_light.dropna()
+
+    temp_light = temp_light[(temp_light["day"] == 10) & (temp_light["month"] == 4) & (temp_light["year"] == 2024)]
+
+    result = linregress(temp_light["light_bh1750"], temp_light["temperature_ds18b20"])
+    print(f"temp_vs_light: {result}")
+
+    fig = px.scatter(temp_light, x="light_bh1750", y="temperature_ds18b20", title="Korelace mezi teplotou a světlem",)
+
+    fig.add_trace(go.Scatter(x=temp_light["light_bh1750"], y=result.intercept + result.slope * temp_light["light_bh1750"],
+                             mode="lines", name="Lineární regrese", line=dict(color="red")))
+
+    fig.update_layout(
+        title_text="Korelace mezi teplotou a světlem",
+        xaxis_title="Světlo (lux)",
+        yaxis_title="Teplota (°C)",
+    )
+
+    return fig
+
+
+def temp_vs_humidity(data):
+    temp_hum = data[["day", "year", "month", "temperature_ds18b20", "humidity_dht"]]
+    temp_hum = temp_hum.dropna()
+
+    temp_hum = temp_hum[(temp_hum["day"] == 1) & (temp_hum["month"] == 1) & (temp_hum["year"] == 2023)]
+
+    result = linregress(temp_hum["temperature_ds18b20"], temp_hum["humidity_dht"])
+    print(f"temp_vs_humidity: {result}")
+
+    fig = px.scatter(temp_hum, x="temperature_ds18b20", y="humidity_dht", title="Korelace mezi teplotou a vlhkostí")
+
+    fig.add_trace(go.Scatter(x=temp_hum["temperature_ds18b20"], y=result.intercept + result.slope * temp_hum["temperature_ds18b20"],
+                             mode="lines", name="Lineární regrese", line=dict(color="red")))
+
+    fig.update_layout(
+        title_text="Korelace mezi teplotou a vlhkostí",
+        xaxis_title="Teplota (°C)",
+        yaxis_title="Vlhkost (%)",
+    )
+
+    return fig
 

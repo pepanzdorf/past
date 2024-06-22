@@ -1,0 +1,14 @@
+<div id="hypothesis" style="width: 1000px; margin: 0 auto; background-color: lightgray; padding: 30px 100px 30px 100px">
+    <p>
+        Uděláme test poměrně intuitivní skutečnosti: v prosinci je větší zima než v červenci. Budeme
+        předpokládat, že variance v obou měsících je stejná. (To i podle našich dat poměrně odpovídá)
+        Provedeme two-sample t-test pomocí <code>scipy.stats.ttest_ind</code>. Naše nulová hypotéza
+        bude, že průměry obou měsíců jsou stejné. Alternativní hypotéza bude, že průměr v prosinci je
+        nižší než v červenci. Nulovou hypotézu zamítneme pro <code>&alpha = 0.05</code>.
+    </p>
+    <p>
+        <code>TtestResult(statistic=-255.14755825218157, pvalue=0.0, df=19609.0)</code><br>
+        Výsledek testu je, že nulovou hypotézu zamítáme. To znamená, že průměr v prosinci je nižší než v
+        červenci. Tedy v prosinci je větší zima než v červenci.
+    </p>
+</div>

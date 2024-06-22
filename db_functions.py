@@ -17,5 +17,6 @@ def load_all_data():
 
     all_data["year"] = all_data["inserted_at"].dt.year
     all_data["month"] = all_data["inserted_at"].dt.month
+    all_data["day"] = all_data["inserted_at"].dt.day
 
     return all_data

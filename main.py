@@ -37,6 +37,9 @@ with open("texts/temp_text.html", "r") as f:
 with open("texts/temp_text2.html", "r") as f:
     text2 = f.read()
 
+with open("texts/temp_hypothesis.html", "r") as f:
+    hypothesis = f.read()
+
 with open("plots/temp_normal_table.html", "r") as f:
     table1 = f.read()
 
@@ -57,6 +60,7 @@ with open("weather_statistics.html", "w") as f:
                 "{TEMP TABLE}": table1,
                 "{TEMP HIST NORMAL}": hist_normal,
                 "{TEMP NORMALS}": normals,
+                "{TEMP HYPOTHESIS}": hypothesis,
             },
         )
     )
