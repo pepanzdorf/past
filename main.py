@@ -1,6 +1,5 @@
 from db_functions import load_all_data
 from plots import *
-from constants import *
 
 
 all_data = load_all_data()
@@ -9,22 +8,22 @@ temperature_plots = main_temperature_plot(all_data)
 temperature_plots.write_html("plots/temperature_histograms.html", full_html=False)
 
 t_normal_table = temp_normal_table(all_data)
-t_normal_table.write_html("plots/temp_normal_table.html", full_html=False)
+t_normal_table.write_html("plots/temp_normal_table.html", full_html=False, include_plotlyjs='cdn')
 
 t_hist_normal = histogram_normal_animation(all_data)
-t_hist_normal.write_html("plots/temp_hist_normal.html", full_html=False, auto_play=False)
+t_hist_normal.write_html("plots/temp_hist_normal.html", full_html=False, auto_play=False, include_plotlyjs='cdn')
 
 t_normals = plot_with_normal(all_data)
-t_normals.write_html("plots/temp_normals.html", full_html=False)
+t_normals.write_html("plots/temp_normals.html", full_html=False, include_plotlyjs='cdn')
 
 lin_reg_temp_vs_hum = temp_vs_humidity(all_data)
-lin_reg_temp_vs_hum.write_html("plots/temp_vs_hum.html", full_html=False)
+lin_reg_temp_vs_hum.write_html("plots/temp_vs_hum.html", full_html=False, include_plotlyjs='cdn')
 
 lin_reg_temp_vs_light = temp_vs_light(all_data)
-lin_reg_temp_vs_light.write_html("plots/temp_vs_light.html", full_html=False)
+lin_reg_temp_vs_light.write_html("plots/temp_vs_light.html", full_html=False, include_plotlyjs='cdn')
 
 lin_reg_light_vs_hum = light_vs_humidity(all_data)
-lin_reg_light_vs_hum.write_html("plots/light_vs_hum.html", full_html=False)
+lin_reg_light_vs_hum.write_html("plots/light_vs_hum.html", full_html=False, include_plotlyjs='cdn')
 
 
 def fill_template(template, contents):
